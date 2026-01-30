@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    background: linear-gradient(135deg,#ccfbf1 0%, #ffffff 100%);
+    font-family: Arial, sans-serif;
+    color:#1f2937;
+    padding: 20px;
+}
+
+h2 {
+    color: #1e5e59;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+input[type="text"],
+input[type="Email"],
+input[type="Password"],
+select,
+textarea {
+    border: 2px solid #ccfbf1;
+    border-radius: 5px;
+    transition: border-color 0.5s;
+}
+
+input[type="text"]:focus,
+input[type="Email"]:focus,
+input[type="Password"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color:#0d9488;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    accent-color: #0d9488;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background-color: #0d9488;
+    color:white;
+    border: none;
+    padding: 10px 28px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button[type="submit"]:hover {
+    background-color: #14b8a6 ;
+}
+
+
+td{
+    
+	vertical-align: top;
+ 
+}
+
+
+
+</style>
+<script>
+   function submitAlert(){
+        
+        // clear old errors
+        document.getElementById("firstError").innerText = "";
+        document.getElementById("rollError").innerText = "";
+        document.getElementById("mobileError").innerText = "";
+		document.getElementById("fatherError").innerText = "";
+		document.getElementById("genderError").innerText = "";
+		document.getElementById("departmentError").innerText="";
+		document.getElementById("courseError").innerText = ""; 
+
+   
+        const first = document.getElementById("first").value.trim();
+		const rollnumber = document.getElementById('roll').value.trim();
+		const fathername = document.getElementById('fathername').value.trim();
+		const gender = document.querySelector('input[name="Gender"]:checked');
+		const mobile=document.getElementById('mobile').value;
+		const departments = document.querySelectorAll('input[name="department"]:checked');
+		const courseid = document.getElementById('courseid').value;
+		const email = document.getElementById('email').value.trim(); 
+		
+		let isValid = true;
+		
+		//console.log(first)
+		
+		if (first.length < 3){
+		
+		    document.getElementById("firstError").innerText =
+              "First name must be at least 3 characters";
+		    isValid = false;
+		}
+		if (!rollnumber.startsWith('PG')) {
+		 
+		      document.getElementById("rollError").innerText=
+			    "Roll number must start with PG";
+			  isValid = false;
+		}
+		if (fathername == ""){
+		      document.getElementById("fatherError").innerText=
+			    "Father's Name is Required";
+			  isValid = false;
+		}
+		if (!gender) {
+		      document.getElementById("genderError").innerText=
+			  "Please select an option";
+		      isValid = false;
+		}
+		if (departments.length === 0) {
+                document.getElementById("departmentError").innerText =
+                "Please select at least one department";
+                isValid = false;
+        }
+		if (courseid === "") {
+             document.getElementById("courseError").innerText =
+             "Please select a course";
+             isValid = false;
+        }
+		if (email == ""){
+		    document.getElementById("emailError").innerText =
+            "Email is required";
+            isValid = false;
+		}else if (!emailPattern.test(email)) {
+            document.getElementById("emailError").innerText =
+            "Please enter a valid email address";
+            isValid = false;
+        }
+		
+
+        if (!/^\d{10}$/.test(mobile)) {
+		
+            document.getElementById("mobileError").innerText =
+            "Mobile number must be exactly 10 digits";
+            isValid = false;
+        }
+		
+	    return isValid;	
+	
+		
+    }   
+   
+</script>
+</head>
+<body>
+    <div style="max-width: 650px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+
+    <h2>Student Registration Form</h2>
+
+    <form onsubmit="return submitAlert()">
+	    <table border="0">
+		 <tr>
+            <td>Student Name:</td>
+            <td colspan="2">
+            <input id="first" type="text" placeholder="First Name">
+            <input type="text" placeholder="Last Name">
+            <span id="firstError" style="color:red; font-size:12px; display:block; min-height:16px;"></span>
+          </td>
+        </tr>
+		  
+		  <tr>
+			<td>Roll No:</td>
+			<td colspan="2" >
+			  <input id="roll" type="text" style="width: 100%;">
+			  <span id="rollError" style="color:red; font-size:12px; display:block; min-height:16px;"></span>
+			</td>
+		  </tr>
+		  <tr>
+		     <td></td>
+			 <td><span id="rollError" style="color:red; font-size:12px;"></span></td>
+			 <td></td>
+		  </tr>
+		  <tr>
+		    <td>Father's Name: </td>
+			<td colspan="3">
+			   <input id = "fathername" type="text">
+			   <span id="fatherError" style="color:red; font-size:12px; display:block; min-height:16px;"></span>
+			</td>
+		  </tr>
+		  <tr>
+		    <td>Date of Birth: </td>
+			<td><input type="text" placeholder="DD"></td>
+			<td><input type="text" placeholder="MM"></td>
+			<td><input type="text" placeholder="YYYY"></td>
+		  </tr>
+		  <tr>
+		    <td>Mobile Number: </td>
+			<td colspan="2">
+			   <input id ="mobile" type="text">
+			   <span id="mobileError" style="color:red; font-size:12px; display:block; min-height:16px;"></span>
+			</td>
+			
+		  </tr>
+		  <tr>
+		    <td>Email: </td>
+			<td><input id="email" type="Email" placeholder="Enter Your Email">
+	            <span id="emailError" style="color:red; font-size:12px; display:block; min-height:16px;"></span>		
+			</td>
+		  </tr>
+		  <tr>
+		    <td>Password:</td>
+			<td><input type="Password"></td>
+		  </tr>
+		  <tr>
+		    <td>Gender: </td>
+			<td colspan="3"><input type="radio" name="Gender" value="male"> Male
+	            <input type="radio" Name="Gender" value="female">Female	
+                <span id="genderError" style="color:red; font-size: 12px; display:block; min-height:16px;"></span>				
+			</td>
+			
+		  </tr>
+		  <tr>
+            <td>Departments</td>
+            <td colspan="3"><input type="checkbox" name="department" value="cse"> Computer Science
+                            <input type="checkbox" name="department" value="ece"> Electronics
+                            <input type="checkbox" name="department" value="mech"> Mechanical
+                            <input type="checkbox" name="department" value="civil"> Civil
+							<span id="departmentError" style="color:red; font-size:12px; display:block; min-height:16px;"></span>
+            </td>
+          </tr>
+		  <tr>
+            <td>Course</td>
+            <td>
+            <select id="courseid" name="course">
+			                      <option value="">-- Select Course --</option>
+                                  <option value="bsc">BSc</option>
+                                  <option value="bca">BCA</option>
+                                  <option value="bcom">BCom</option>
+			</select>
+								  <span id="courseError" style="color:red; font-size:12px; display:block; min-height:16px;"></span>
+            </td>
+          </tr>
+		  <tr>
+            <td>City</td>
+            <td colspan="2"><input type="text"></td>			
+		  </tr>
+		  <tr>
+	        <td>Address</td>
+            <td colspan="3">
+                    <textarea Name="address" rows="4" cols="40" placeholder="please enter your address"></textarea>			
+			</td>		
+		  </tr>
+		  <tr>
+            <td></td>
+            <td><button type="submit" >Submit</button></td>		
+		  </tr>
+
+
+		</table>
+    </form>
+   </div>
+
+</body>
+</html>
