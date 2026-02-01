@@ -62,7 +62,7 @@ The registration form includes the following fields:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/student-registration-form.git
+   git clone https://github.com/sareena-rahim/student-registration-form
    ```
 
 2. Open `index.html` in your web browser
